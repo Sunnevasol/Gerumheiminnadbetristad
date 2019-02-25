@@ -1,4 +1,3 @@
-#version 2.2
 class Bord1():
     def __init__(self):
         pass
@@ -12,11 +11,11 @@ class Bord1():
 
         from random import randint
 
-        rusl_listi = ["pepsi-dós","epli", "bananahýði","plaströr","mjólkurferna","svalaferna"]
+        rusl_listi = ["pepsi-dós","epli", "bananahýði","plaströr","mjólkurferna","svalaferna","skyrdolla","tyggjó","eyrnapinni","kókflaska"]
         tunnur_listi = ["plasttunna","pappatunna","lífrænn úrgangur","almennt rusl", "flöskur og dósir"]
         tunnur_numer =["1","2","3","4","5"]
 
-        teljari = len(rusl_listi)
+        teljari = 6
         heildarstig = 0
 
         print("höfum eftirfarandi tunnur:")
@@ -26,7 +25,7 @@ class Bord1():
             print()
 
         for i in range(teljari):
-            random_rusl=randint(0,teljari-1)
+            random_rusl = randint(0,len(rusl_listi)-1)
             rusl = rusl_listi[random_rusl]
             rusl_listi.remove(rusl)
             inntak = input("í hvaða tunnu fer " + rusl +"?")
@@ -41,7 +40,7 @@ class Bord1():
                     print("æjæj þetta var ekki rétt")
                     teljari = teljari -1
                     heildarstig = heildarstig -1
-            elif(rusl=="pepsi-dós"):
+            elif(rusl=="pepsi-dós" or rusl == "kókflaska"):
                 rett = tunnur_numer[4]
                 if(inntak == rett):
                     print("rétt hjá þér!!")
@@ -52,7 +51,7 @@ class Bord1():
                     print("æjæj þetta var ekki rétt")
                     teljari = teljari -1
                     heildarstig = heildarstig -1
-            elif(rusl == "plaströr" ):
+            elif(rusl == "plaströr" or rusl == "skyrdolla"):
                 rett = tunnur_numer[0]
                 if(inntak == rett):
                     print("rétt hjá þér!!")
@@ -76,6 +75,18 @@ class Bord1():
                     print("æjæj þetta var ekki rétt")
                     teljari = teljari -1
                     heildarstig = heildarstig - 1
+
+            elif(rusl == "tyggjó" or rusl == "eyrnapinni" ):
+                 rett = tunnur_numer[3]
+                 if(inntak == rett):
+                     print("rétt hjá þér!!")
+                     heildarstig = heildarstig + 1
+                     teljari= teljari -1
+
+                 else:
+                     print("æjæj þetta var ekki rétt")
+                     teljari = teljari -1
+                     heildarstig = heildarstig - 1
         print("Þú hefur lokið borði 1, þú ert núna komin með " , heildarstig, "fræ")
 
 
