@@ -1,4 +1,4 @@
-#version 2.0
+#version 2.2
 class Bord1():
     def __init__(self):
         pass
