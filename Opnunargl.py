@@ -1,6 +1,7 @@
 from bord1 import Bord1
 from bord2 import Bord2
 from bord3 import Bord3
+from lokabord import Lokabord
 
 class Byrja:
     def __init__(self, byrja=1 , haetta=2):
