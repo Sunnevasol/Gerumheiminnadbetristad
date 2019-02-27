@@ -18,6 +18,9 @@ class Byrja:
     #Viltu hefja leikinn ef ja/1-> kalla a bord 3 klasa og fall
         bord3_start = Bord3()
         bord3_start.byrja_bord3()
+    #Viltu hefja leikinn ef ja/1-> kalla a lokabord klasa og fall
+        lokabord_start = Lokabord()
+        lokabord_start.byrja_lokabord()
 
 def main():
     start=Byrja()
