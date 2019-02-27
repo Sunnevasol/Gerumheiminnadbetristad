@@ -28,7 +28,7 @@ class Bord1():
         random_rusl=randint(0,len(rusl_listi)-1)
         rusl = rusl_listi[random_rusl]
         rusl_listi.remove(rusl)
-        inntak = input("í hvaða tunnu fer " + rusl +"?")
+        inntak = input("í hvaða tunnu fer " + rusl +"? ")
         if(rusl == "epli" or rusl == "bananahýði"):
             rett = tunnur_numer[2]
             if(inntak == rett):
