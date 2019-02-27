@@ -140,7 +140,7 @@ class Bord2():
             inntak = input("Svar: ")
             if(inntak == "a"):
                 print("Æjæj þetta var rangt, við setjum matarleifar í brúnu moltutunnuna")
-                print("Þú færð 2 fræ")
+                print("Þú færð 0 fræ")
 
             elif(inntak == "b"):
                 Heildarstig = Heildarstig + 2
