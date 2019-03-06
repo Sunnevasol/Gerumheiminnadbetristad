@@ -119,8 +119,8 @@ def bord1():
         gameDisplay.blit(graentunna,(170,80))
         gameDisplay.blit(svorttunna,(150,80))
         gameDisplay.blit(raudtunna,(230,80))
-        takkar("Hermína",150,450,165,75,white,grey,'hermione')
-        takkar("Guðrún",550,450,165,75,white,grey,'ginny')
+        takkar("",150,450,165,75,white,grey,'')
+        takkar("",550,450,165,75,white,grey,'')
         pygame.display.update()
         clock.tick(10)
 
