@@ -231,7 +231,8 @@ def raudTunna():
         retttunna()
     else:
         vitlaustunna()
-
+        
+# Ef giskað er á rétta tunnu
 def retttunna():
     rett = True
     while rett:
@@ -245,7 +246,8 @@ def retttunna():
         takkar("Halda áfram",350,500,180,75,WHITE,GREY,'StartLevel1b')
         pygame.display.update()
         clock.tick(10)
-
+        
+# Ef giskað er á ranga tunnu
 def vitlaustunna():
     rangt = True
     while rangt:
@@ -259,6 +261,16 @@ def vitlaustunna():
         takkar("Reyna aftur",350,500,180,75,WHITE,GREY,'StartLevel1b')
         pygame.display.update()
         clock.tick(10)
+        
+# Spurningalisti
+spurningalisti = [
+    "spurning 1 ?? \nsvarmöguleiki a \nsvarmöguleiki b \nsvarmöguleiki c",
+    "spurning 2 ??? \nsvarmöguleiki a \nsvarmöguleiki b \nsvarmöguleiki c",
+    "spurning 3 ??? \nsvarmöguleiki a \nsvarmöguleiki b \nsvarmöguleiki c",
+    "spurning 4 ??? \nsvarmöguleiki a \nsvarmöguleiki b \nsvarmöguleiki c",
+    "Spurning 5 ??? \nsvarmöguleiki a \nsvarmöguleiki b \nsvarmöguleiki c",
+    "spurning 6 ??? \nsvarmöguleiki a \nsvarmöguleiki b \nsvarmöguleiki c",
+    "spurning 7 ??? \nsvarmöguleiki a \nsvarmöguleiki b \nsvarmöguleiki c" ]
 
 # BORÐ 2 - SPURNINGAR
 # Inngangur
