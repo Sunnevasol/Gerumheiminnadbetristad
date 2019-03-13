@@ -100,9 +100,9 @@ fiskageymsla = random.choice(fiskalisti[0:])
 #Bakgrunnur fyrir vinningsborð
 bakgrunnurb4 = pygame.image.load('lokabordbakgrunnur.jpg')
 bakgrunnurb4 = pygame.transform.scale(bakgrunnurb4, (800, 600))
-solblommynd = pygame.image.load('Sólblóm.png')
+solblommynd = pygame.image.load('Solblom.png')
 solblommynd = pygame.transform.scale(solblommynd, (100, 150))
-eplatremynd = pygame.image.load('Eplatré.png')
+eplatremynd = pygame.image.load('Eplatre.png')
 eplatremynd = pygame.transform.scale(eplatremynd, (100, 150))
 
 ###### ANNAÐ #######
@@ -231,7 +231,7 @@ def raudTunna():
         retttunna()
     else:
         vitlaustunna()
-        
+
 # Ef giskað er á rétta tunnu
 def retttunna():
     rett = True
@@ -246,7 +246,7 @@ def retttunna():
         takkar("Halda áfram",350,500,180,75,WHITE,GREY,'StartLevel1b')
         pygame.display.update()
         clock.tick(10)
-        
+
 # Ef giskað er á ranga tunnu
 def vitlaustunna():
     rangt = True
@@ -261,7 +261,7 @@ def vitlaustunna():
         takkar("Reyna aftur",350,500,180,75,WHITE,GREY,'StartLevel1b')
         pygame.display.update()
         clock.tick(10)
-        
+
 # Spurningalisti
 spurningalisti = [
     "spurning 1 ?? \nsvarmöguleiki a \nsvarmöguleiki b \nsvarmöguleiki c",
