@@ -63,6 +63,7 @@ rusl10 = pygame.image.load('dos.jpg')
 rusl10 = pygame.transform.scale(rusl10, (190, 200))
 ruslalisti = [rusl1,rusl2,rusl3,rusl4,rusl5,rusl6,rusl7,rusl8,rusl9,rusl10]
 ruslageymsla1 = random.choice(ruslalisti[0:])
+rusl_breyta = True
 # Bakgrunnur fyrir borð 1 -
 bakgrunnurb1 = pygame.image.load('pappirbak.jpg')
 # Borð 2 inngangur - Mynd af ...
@@ -79,18 +80,19 @@ bakgrunnurb3 = pygame.transform.scale(bakgrunnurb3, (800, 600))
 #bakgrunnurb3vinna = pygame.image.load('')
 # Borð 3 - Mynd af háfi fyrir sjóborð
 hafurmynd = pygame.image.load('hafur1.png')
-hafur_breidd = 96
+hafurmynd = pygame.transform.scale(hafurmynd, (200, 200))
+hafur_breidd = 86
 hafur_haed = 40
 # Borð 3 - Myndir af plasti fyrir Sjóborð
 plastflaska = pygame.image.load('Plastflaska.png')
 plastflaska = pygame.transform.scale(plastflaska, (113, 170))
 # Myndir af fiskum
 fiskur1 = pygame.image.load('nemo.png')
-fiskur1 = pygame.transform.scale(fiskur1, (353, 204))
+fiskur1 = pygame.transform.scale(fiskur1, (203, 94))
 fiskur2 = pygame.image.load('skjaldbaka.png')
-fiskur2 = pygame.transform.scale(fiskur2, (259, 215))
+fiskur2 = pygame.transform.scale(fiskur2, (209, 165))
 fiskur3 = pygame.image.load('dora.png')
-fiskur3 = pygame.transform.scale(fiskur3, (232, 193))
+fiskur3 = pygame.transform.scale(fiskur3, (202, 163))
 fiskur4 = pygame.image.load('hakarl.png')
 fiskur4 = pygame.transform.scale(fiskur4, (156, 133))
 fiskalisti = [fiskur1, fiskur2, fiskur3, fiskur4]
@@ -100,9 +102,9 @@ fiskageymsla = random.choice(fiskalisti[0:])
 #Bakgrunnur fyrir vinningsborð
 bakgrunnurb4 = pygame.image.load('lokabordbakgrunnur.jpg')
 bakgrunnurb4 = pygame.transform.scale(bakgrunnurb4, (800, 600))
-solblommynd = pygame.image.load('Solblom.png')
+solblommynd = pygame.image.load('Sólblóm.png')
 solblommynd = pygame.transform.scale(solblommynd, (100, 150))
-eplatremynd = pygame.image.load('Eplatre.png')
+eplatremynd = pygame.image.load('Eplatré.png')
 eplatremynd = pygame.transform.scale(eplatremynd, (100, 150))
 
 ###### ANNAÐ #######
@@ -185,6 +187,7 @@ def b1Inngangur():
 def bord1():
     stig = 0
     b1 = True
+    global rusl_breyta
     while b1:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -192,7 +195,10 @@ def bord1():
                 quit()
         skjaMynd.blit(bakgrunnurb1, (0,0))
         skilabod1('Í hvaða tunnu fer ruslið?',15)
-        skjaMynd.blit(ruslageymsla1, (300,77))                      # Birta mynd af random rusli
+        if rusl_breyta == False:
+            randomrusl()
+        else:
+            skjaMynd.blit(ruslageymsla1, (317,100))                  # Birta mynd af random rusli
         skjaMynd.blit(blatunna,(-90,250))
         skjaMynd.blit(bruntunna,(60,250))
         skjaMynd.blit(graentunna,(210,250))
@@ -206,33 +212,45 @@ def bord1():
         pygame.display.update()
         clock.tick(10)
 
+def randomrusl():
+    global rusl_breyta
+    global ruslageymsla1
+    ruslalisti = [rusl1,rusl2,rusl3,rusl4,rusl5,rusl6,rusl7,rusl8,rusl9,rusl10]
+    ruslageymsla1 = random.choice(ruslalisti[0:])
+    skjaMynd.blit(ruslageymsla1, (377,100))
+    rusl_breyta = True
+
 def blaTunna():
+    global ruslageymsla1
     if ((ruslageymsla1 == rusl3) or (ruslageymsla1 == rusl6)):
         retttunna()
     else:
         vitlaustunna()
 def brunTunna():
+    global ruslageymsla1
     if ((ruslageymsla1 == rusl1) or (ruslageymsla1 == rusl8)):
         retttunna()
     else:
         vitlaustunna()
 def graenTunna():
+    global ruslageymsla1
     if ((ruslageymsla1 == rusl4) or (ruslageymsla1 == rusl5)):
         retttunna()
     else:
         vitlaustunna()
 def svortTunna():
+    global ruslageymsla1
     if ((ruslageymsla1 == rusl2) or (ruslageymsla1 == rusl7)):
         retttunna()
     else:
         vitlaustunna()
 def raudTunna():
+    global ruslageymsla1
     if ((ruslageymsla1 == rusl9) or (ruslageymsla1 == rusl10)):
         retttunna()
     else:
         vitlaustunna()
 
-# Ef giskað er á rétta tunnu
 def retttunna():
     rett = True
     while rett:
@@ -243,38 +261,38 @@ def retttunna():
         skjaMynd.blit(bakgrunnurb1, (0,0))
         # Hækka fræteljarann um 2
         skilabod1("Vel gert! Þú valdir rétta tunnu.",7)
-        takkar("Halda áfram",350,500,180,75,WHITE,GREY,'StartLevel1b')
+        takkar("Halda áfram",350,300,180,75,WHITE,GREY,'StartLevel1b')
         pygame.display.update()
         clock.tick(10)
 
-# Ef giskað er á ranga tunnu
 def vitlaustunna():
     rangt = True
+    global rusl_breyta
     while rangt:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 quit()
+        rusl_breyta = False
         skjaMynd.blit(bakgrunnurb1, (0,0))
         # Lækka fræteljarann um 1
         skilabod1("Æjæj þetta rusl á ekki heima hér :(",7)
-        takkar("Reyna aftur",350,500,180,75,WHITE,GREY,'StartLevel1b')
+        takkar("Reyna aftur",350,300,180,75,WHITE,GREY,'StartLevel1b')
         pygame.display.update()
         clock.tick(10)
-
 # Spurningalisti
-spurningalisti = [
-    "spurning 1 ?? \nsvarmöguleiki a \nsvarmöguleiki b \nsvarmöguleiki c",
-    "spurning 2 ??? \nsvarmöguleiki a \nsvarmöguleiki b \nsvarmöguleiki c",
-    "spurning 3 ??? \nsvarmöguleiki a \nsvarmöguleiki b \nsvarmöguleiki c",
-    "spurning 4 ??? \nsvarmöguleiki a \nsvarmöguleiki b \nsvarmöguleiki c",
-    "Spurning 5 ??? \nsvarmöguleiki a \nsvarmöguleiki b \nsvarmöguleiki c",
-    "spurning 6 ??? \nsvarmöguleiki a \nsvarmöguleiki b \nsvarmöguleiki c",
-    "spurning 7 ??? \nsvarmöguleiki a \nsvarmöguleiki b \nsvarmöguleiki c" ]
+spurning1 = "Hvernig ætlar þú í skólann í dag? \nStrætó \nHjóli \nFá far hjá ömmu"
+spurning2 = "Þegar ég er búin með mjólkina þá: \nHendi ég fernunni í ruslið \nSkola hana, læt þorna og hendi henni svo í pappatunnuna \nLæt hana aftur inn í ísskáp og mamma gengur frá henni"
+spurning3 = "Hvað gerir þú við fötin þín þegar þau passa ekki lengur? \nFer með þau í rauðakrossinn \nHendi þeim í ruslið \nGef litla frænda/frænku þau"
+spurning4 = "Þegar ég tannbursta mig þá: \nLæt ég vatnið renna allan tímann \nSkrúfa frá rétt á meðan ég bleyti burstann \nÉg tannbursta mig ekki"
+spurning5 = "Þegar ég klára ekki kvöldmatinn minn þá: \nHendi ég honum í svörtu tunnuna \nSet afganginn í box og inni ísskáp \nHendi ég honum í brúnu moltu tunnuna"
+spurning6 = "Þegar ég fer í búðina þá: \nTek ég með mér taujpoka \nKaupi 3 plastpoka \nKaupi maíspoka"
+spurningalisti = [spurning1, spurning2, spurning3, spurning4, spurning5, spurning6]
 
 # BORÐ 2 - SPURNINGAR
 # Inngangur
 def b2Inngangur():
+    tonlist()
     inngangur3 = True
     while inngangur3:
         for event in pygame.event.get():
@@ -292,6 +310,7 @@ def b2Inngangur():
 
 ###### Borð 2 ######
 def bord2():
+    tonlist()
     bordtvo = True
     while bordtvo:
         for event in pygame.event.get():
@@ -300,16 +319,25 @@ def bord2():
                 quit()
         skjaMynd.blit(bakgrunnurb2, (0,0))
         skilabod1("Spurningaleikur",15)
-        skilabod4("Veldu þann valmöguleika sem þér þykir réttastur",6)
-        skilabod4("Hér kemur spurningin",4)
-        skilabod4("'Svarmöguleiki A'",2.2)
-        skilabod4("'Svarmöguleiki B'",1.55)
-        skilabod4("'Svarmöguleiki C'",1.2)
-        takkar("A",650,250,75,75,WHITE,GREY,'')
-        takkar("B",650,350,75,75,WHITE,GREY,'')
-        takkar("C",650,450,75,75,WHITE,GREY,'')
+        skilabod2("Veldu þann valmöguleika sem þér þykir réttastur",6)
+        skilabod2(random.choice(spurningalisti[0:]),4)
+        #skilabod2("",2.2)
+        #skilabod2("",1.55)
+        #skilabod2("",1.2)
+        takkar("A",650,250,75,75,WHITE,GREY,'a')
+        takkar("B",650,350,75,75,WHITE,GREY,'b')
+        takkar("C",650,450,75,75,WHITE,GREY,'c')
         pygame.display.update()
         clock.tick(10)
+
+def giskA():
+    pass
+
+def giskB():
+    pass
+
+def giskC():
+    pass
 
 # BORÐ 3 - SJÓBORÐ
 # Inngangur
@@ -320,7 +348,7 @@ def b3Inngangur():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 quit()
-        skjaMynd.blit(bakgrunnur1, (0,0))
+        skjaMynd.blit(bakgrunnurb1, (0,0))
         skilabod1('Þú ert komin/n í borð 3', 9)
         skilabod2('Ýttu á "Byrja!" til að hefja leik', 5)
         skilabod2('Meiri texti hér ef við viljum', 3)
@@ -332,22 +360,23 @@ def b3Inngangur():
 ############### Borð 3 ###################
 def bord3():
     tonlistsjor()
+    stig = 0
     #Upphafsstaður á háfi
     x = (display_breidd*0.35)
-    y = (display_haed*0.6)
+    y = (display_haed*0.73)
     x_change = 0
     #TELJARI
     counter, teljari = 30, '30'.rjust(3)
     pygame.time.set_timer(pygame.USEREVENT, 1000)
     font = pygame.font.Font('Sansation-Regular.ttf', 30)
     #Stærð og hreyfing á fiskum
-    fiskur_byrjax = random.randrange(0,display_breidd)
+    fiskur_byrjax = random.randrange(10,display_breidd-10)
     fiskur_byrjay = -600
     fiskur_hradi = random.randrange(10,14)
     fiskur_haed = 64
     fiskur_breidd = 72
     #Stærð og hreyfing á plasti
-    plast_byrjax = random.randrange(0,display_breidd)
+    plast_byrjax = random.randrange(10,display_breidd-10)
     plast_byrjay = -600
     plast_hradi = random.randrange(10,14)
     plast_haed = 60
@@ -364,9 +393,9 @@ def bord3():
                 teljari = str(counter).rjust(4) if counter > 0 else vinnurbord3()
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_LEFT:
-                    x_change = -13
+                    x_change = -25
                 elif event.key == pygame.K_RIGHT:
-                    x_change = 13
+                    x_change = 25
             if event.type == pygame.KEYUP:
                 if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
                     x_change = 0
@@ -387,17 +416,20 @@ def bord3():
         if (plast_byrjay > display_haed):
             plast_byrjay = 0 - plast_haed
             plast_byrjax = random.randrange(0,display_breidd)
+        fraestig(stig)
         #Þegar Háfurinn nær óvart fiski
         if (y < fiskur_byrjay + fiskur_haed):
             if ((x > fiskur_byrjax and x < fiskur_byrjax + fiskur_breidd) or (x + hafur_breidd > fiskur_byrjax and x + hafur_breidd < fiskur_byrjax + fiskur_breidd)):
                 skilabod1("Æjæj þú átt að veiða plastið",5)
                 #Hér eiga fræstigin að minnka...
+                stig -= 1
 
         # Þegar háfurinn nær plasti
         if (y < plast_byrjay + plast_haed):
             if ((x > plast_byrjax and x < plast_byrjax + plast_breidd) or (x + plast_breidd > plast_byrjax and x + hafur_breidd < plast_byrjax + plast_breidd)):
                 skilabod1("Flott!",5)
                 # Hér eiga fræstigin að hækka...
+                stig += 1
 
         pygame.display.update()
         clock.tick(20)
@@ -413,10 +445,11 @@ def vinnurbord3():
         skjaMynd.blit(bakgrunnur1, (0,0))
         skilabod2('Til hamingju!',9)
         skilabod2('þú kláraðir borð 3',5.5)
+        takkar("Halda áfram",310,450,190,75,WHITE,GREY,'StartLevel4')
         pygame.display.update()
-        pygame.time.wait(50)
+        pygame.time.wait(10)
         #lokaBordInngangur()
-"""
+
 ########## LOKABORÐ ############
 def lokaBordInngangur():
     inngangur4 = True
@@ -426,12 +459,15 @@ def lokaBordInngangur():
                 pygame.quit()
                 quit()
         skjaMynd.blit(bakgrunnurb4, (0,0))
-        skilabod1('Til hamingju þú ert komin/n á leiðarenda', 9)
-        skilabod2('Nú getur þú ...', 7)
-        skilabod2('Meiri texti hér ef við viljum', 5)
-        takkar("Halda áfram",150,450,150,75,WHITE,GREY,'StartLevel4')
+        skilabod1('Til hamingju!',15)
+        skilabod1('þú ert komin/nn á leiðarenda', 6.5)
+        skilabod2('Nú getur þú ...', 3.3)
+        skilabod2('Meiri texti hér ef við viljum', 2.5)
+        takkar("Halda áfram",150,450,190,75,WHITE,GREY,'StartLevel4b')
         takkar("Hætta",550,450,150,75,WHITE,GREY,'quit')
-"""
+        pygame.display.update()
+        clock.tick(10)
+
 # Borð 4
 def bord4():
     bordfjogur = True
@@ -474,7 +510,7 @@ def fraestig(stig):
 
 ###### Tónlist ########
 def tonlist():
-    pygame.mixer.music.load('')
+    pygame.mixer.music.load('toystory.mp3')
     pygame.mixer.music.set_endevent(pygame.constants.USEREVENT)
     pygame.mixer.music.play(-1)
 
@@ -566,6 +602,12 @@ def takkar(text,x,y,breidd,haed,litur1,litur2,action=None):
                 b2Inngangur()
             elif action == "StartLevel2b":
                 bord2()
+            elif action == "a":
+                giskA()
+            elif action == "b":
+                giskB()
+            elif action == "c":
+                giskC()
             elif action == "StartLevel3":
                 b3Inngangur()
             elif action == "StartLevel3b":
@@ -597,7 +639,7 @@ def main():
         if level == 0:
             if state_tune != 0:
                 state_tune = 0
-            bord4()
+            b1Inngangur()
         pygame.display.update()
         pygame.display.flip()
         clock.tick(10)
@@ -607,3 +649,4 @@ if __name__=='__main__':
     main()
 else:
     print('No just imported by another class')
+
