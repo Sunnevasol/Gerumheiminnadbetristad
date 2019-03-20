@@ -580,7 +580,7 @@ def bord3():
                 # Hér eiga fræstigin að hækka...
                 fisk=True
                 # Hér eiga fræstigin að hækka...
-                if fisk == True and plast == True:
+                if fisk == True and plas == True:
                     stig += 1
                     plas = False
         pygame.display.update()
