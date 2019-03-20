@@ -93,9 +93,9 @@ fiskageymsla = random.choice(fiskalisti[0:])
 #Bakgrunnur fyrir vinningsborð
 bakgrunnurb4 = pygame.image.load('lokabordbakgrunnur.jpg')
 bakgrunnurb4 = pygame.transform.scale(bakgrunnurb4, (800, 600))
-solblommynd = pygame.image.load('Sólblóm.png')
-solblommynd = pygame.transform.scale(solblommynd, (100, 150))
-eplatremynd = pygame.image.load('Eplatré.png')
+rosmynd = pygame.image.load('Ros.png')
+rosmynd = pygame.transform.scale(rosmynd, (100, 150))
+eplatremynd = pygame.image.load('Eplatre.png')
 eplatremynd = pygame.transform.scale(eplatremynd, (100, 150))
 
 ###### ANNAÐ #######
@@ -120,7 +120,6 @@ def opnunarGluggi():
 
 #fræðsla um umhverfisvitund...
 def fraedsla():
-    tonlist()
     fraedsla = True
     while fraedsla:
         for event in pygame.event.get():
@@ -141,7 +140,6 @@ def fraedsla():
 
 #Upplýsingar um leikinn og útgáfu leiks
 def uppl():
-    tonlist()
     upplysingar = True
     while upplysingar:
         for event in pygame.event.get():
@@ -171,8 +169,8 @@ def b1Inngangur():
                 quit()
         skjaMynd.blit(bakgrunnurIntro, (0,0))
         skilabod1('Þú ert komin/nn í borð 1', 2.6)
-        skilabod2('Ýttu á "Byrja!" til að hefja leik', 2.1)
-        skilabod2('Meiri texti hér ef við viljum', 1.8)
+        skilabod2('Kannt þú að flokka? látum okkur sjá...', 2.1)
+        skilabod2('Ýttu á "Byrja!" til að hefja leik', 1.8)
         takkar("Byrja",150,400,150,75,WHITE,GREY,'StartLevel1b')
         takkar("Hætta",550,400,150,75,WHITE,GREY,'quit')
         pygame.display.update()
@@ -305,7 +303,8 @@ def bord1vinna():
         fraestig(stig)
         skilabod1('Til hamingju!',3)
         skilabod1('þú kláraðir borð 1',2)
-        takkar("Halda áfram",310,450,190,75,WHITE,GREY,'StartLevel2')
+        takkar("Halda áfram",150,450,190,75,WHITE,GREY,'StartLevel2')
+        takkar("Hætta",450,450,150,75,WHITE,GREY,'opnunargluggi')
         pygame.display.update()
         pygame.time.wait(10)
 
@@ -344,7 +343,7 @@ def b2Inngangur():
         skilabod2('Nú reynir á gáfurnar, gangi þér vel! :)', 2.1)
         skilabod2('Ýttu á "Byrja!" til að hefja leik', 1.8)
         takkar("Byrja",150,450,150,75,WHITE,GREY,'StartLevel2b')
-        takkar("Hætta",550,450,150,75,WHITE,GREY,'quit')
+        takkar("Hætta",550,450,150,75,WHITE,GREY,'opnunargluggi')
         pygame.display.update()
         clock.tick(10)
 
@@ -375,7 +374,7 @@ def bord2():
             pygame.display.update()
             clock.tick(10)
     b3Inngangur()
-
+# Bæta við sér skilaboð fyrir hvern valkost ef við viljum í Sprint 4
 def giskA():
     global i
     if (i == 0):
@@ -415,9 +414,9 @@ def giskC():
     elif (i == 2):
         tvostig()
     elif (i == 3):
-        nullstig()
-    elif (i == 4):
         eittstig()
+    elif (i == 4):
+        tvostig()
     else:
         eittstig()
 
@@ -492,11 +491,13 @@ def b3Inngangur():
                 pygame.quit()
                 quit()
         skjaMynd.blit(bakgrunnurIntro, (0,0))
-        skilabod1('Þú ert komin/nn í borð 3', 2.6)
-        skilabod2('Ýttu á "Byrja!" til að hefja leik', 2.1)
-        skilabod2('Meiri texti hér ef við viljum', 1.8)
+        skilabod1('Þú ert komin/nn í borð 3', 3.1)
+        skilabod2('Markmið borðsins er að veiða plastið úr', 2.4)
+        skilabod2('sjónum, en passaðu þig að veiða ekki fiskana',2.0)
+        skilabod2('Notaðu örvatakkana til að færa netið', 1.7)
+        skilabod2('Ýttu á "Byrja!" til að hefja leik', 1.45)
         takkar("Byrja",150,450,150,75,WHITE,GREY,'StartLevel3b')
-        takkar("Hætta",550,450,150,75,WHITE,GREY,'quit')
+        takkar("Hætta",550,450,150,75,WHITE,GREY,'opnunargluggi')
         pygame.display.update()
         clock.tick(60)
 
@@ -504,6 +505,8 @@ def b3Inngangur():
 def bord3():
     tonlistsjor()
     global stig
+    fisk = True
+    plas = True
     #Upphafsstaður á háfi
     x = (display_breidd*0.35)
     y = (display_haed*0.73)
@@ -513,15 +516,15 @@ def bord3():
     pygame.time.set_timer(pygame.USEREVENT, 1000)
     font = pygame.font.Font('Sansation-Regular.ttf', 30)
     #Stærð og hreyfing á fiskum
-    fiskur_byrjax = random.randrange(10,display_breidd-10)
+    fiskur_byrjax = random.randrange(30,display_breidd-30)
     fiskur_byrjay = -600
-    fiskur_hradi = random.randrange(10,14)
+    fiskur_hradi = random.randrange(10,20)
     fiskur_haed = 64
     fiskur_breidd = 72
     #Stærð og hreyfing á plasti
-    plast_byrjax = random.randrange(10,display_breidd-10)
+    plast_byrjax = random.randrange(30,display_breidd-30)
     plast_byrjay = -600
-    plast_hradi = random.randrange(10,14)
+    plast_hradi = random.randrange(10,20)
     plast_haed = 60
     plast_breidd = 60
     #LYKKJAN
@@ -564,22 +567,27 @@ def bord3():
         if (y < fiskur_byrjay + fiskur_haed):
             if ((x > fiskur_byrjax and x < fiskur_byrjax + fiskur_breidd) or (x + hafur_breidd > fiskur_byrjax and x + hafur_breidd < fiskur_byrjax + fiskur_breidd)):
                 skilabod1("Æjæj þú átt að veiða plastið",5)
+                plas = True
                 #Hér eiga fræstigin að minnka...
-                stig -= 1
+                if plas == True and fisk == True:
+                    stig -= 1
+                    fisk = False
 
         # Þegar háfurinn nær plasti
         if (y < plast_byrjay + plast_haed):
             if ((x > plast_byrjax and x < plast_byrjax + plast_breidd) or (x + plast_breidd > plast_byrjax and x + hafur_breidd < plast_byrjax + plast_breidd)):
                 skilabod1("Flott!",5)
                 # Hér eiga fræstigin að hækka...
-                stig += 1
-
+                fisk=True
+                # Hér eiga fræstigin að hækka...
+                if fisk == True and plast == True:
+                    stig += 1
+                    plas = False
         pygame.display.update()
         clock.tick(20)
 
 ###### Vinna borð 3 #######
 def vinnurbord3(stig):
-    tonlistsjor()
     vinnab3 = True
     while vinnab3:
         for event in pygame.event.get():
@@ -596,6 +604,7 @@ def vinnurbord3(stig):
 
 ########## LOKABORÐ ############
 def lokaBordInngangur():
+    pygame.mixer.music.stop()
     global stig
     inngangur4 = True
     while inngangur4:
@@ -606,11 +615,11 @@ def lokaBordInngangur():
         skjaMynd.blit(bakgrunnurIntro,(0,0))
         skilabod1('Til hamingju!',3.7)
         skilabod2('þú ert komin/nn á leiðarenda',2.6)
-        skilabod2('Nú getur þú ...',2.1)
-        skilabod2('Meiri texti hér ef við viljum',1.8)
+        skilabod2('Nú getur þú plantað fræstigunum sem',2.1)
+        skilabod2('þú hefur safnað þér í leiknum.',1.75)
         fraestig(stig)
         takkar("Halda áfram",150,450,190,75,WHITE,GREY,'StartLevel4b')
-        takkar("Hætta",550,450,150,75,WHITE,GREY,'quit')
+        takkar("Hætta",500,450,150,75,WHITE,GREY,'opnunargluggi')
         pygame.display.update()
         clock.tick(10)
 
@@ -618,29 +627,53 @@ def lokaBordInngangur():
 def bord4():
     global stig
     bordfjogur = True
+    skjaMynd.blit(bakgrunnurb4, (0,0))
+    fraestig(stig)
     while bordfjogur:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 quit()
-        skjaMynd.blit(bakgrunnurb4, (0,0))
-        fraestig(stig)
-        skilabod1('Texti hér...', 15)
-        skilabod3('Texti hér líka', 7)
-        takkar("Eplatré",150,200,120,52,WHITE,GREY,'eplatre')
-        takkar("Sólblóm",550,200,120,52,WHITE,GREY,'solblom')
+        #fraestig(stig)
+        skilabod2('Nú getur þú valið hvort þú viljir', 12)
+        skilabod2('planta eplatrjám eða rósum', 6)
+        skilabod2('Ýttu á takkann til að planta',4)
+        takkar("Eplatré",230,200,120,52,WHITE,GREY,'eplatre')
+        takkar("Rósir",450,200,120,52,WHITE,GREY,'ros')
         pygame.display.update()
         clock.tick(30)
 
 def eplaTre():
-    x = random.randrange(-200,500)
-    y = random.randrange(350,500)
-    skjaMynd.blit(eplatremynd,(x,y))
+    global stig
+    while stig > 0:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                quit()
+        x = random.randrange(20,600)
+        y = random.randrange(350,450)
+        skjaMynd.blit(eplatremynd,(x,y))
+        stig -= 1
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                quit()
 
-def solBlom():
-    x = random.randrange(-200,500)
-    y = random.randrange(350,500)
-    skjaMynd.blit(solblommynd,(x,y))
+def ros():
+    global stig
+    while stig > 0:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                quit()
+        x = random.randrange(20,600)
+        y = random.randrange(350,500)
+        skjaMynd.blit(rosmynd,(x,y))
+        stig -= 1
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                quit()
 
 ####### ANNAÐ #########
 def fiskur(fiskurx, fiskury,fiskurbreidd,fiskurhaed):
@@ -665,7 +698,7 @@ def tonlist():
 def tonlistsjor():
     pygame.mixer.music.load('undersea.mp3')
     pygame.mixer.music.set_endevent(pygame.constants.USEREVENT)
-    pygame.mixer.music.play(-1)
+    pygame.mixer.music.play(1)
 
 #Hljóð sem kemur ef maður svarar rétt
 def rett():
@@ -802,8 +835,8 @@ def takkar(text,x,y,breidd,haed,litur1,litur2,action=None):
                 bord4()
             elif action == "eplatre":
                 eplaTre()
-            elif action == "solblom":
-                solBlom()
+            elif action == "ros":
+                ros()
 
     else:
         pygame.draw.rect(skjaMynd, litur1,(x,y,breidd,haed))
@@ -823,7 +856,7 @@ def main():
         if level == 0:
             if state_tune != 0:
                 state_tune = 0
-            b2Inngangur()
+            bord2()
         pygame.display.update()
         pygame.display.flip()
         clock.tick(10)
