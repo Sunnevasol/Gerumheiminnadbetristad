@@ -19,7 +19,7 @@ size = (display_breidd,display_haed)
 skjaMynd = pygame.display.set_mode(size)
 pygame.display.set_caption('Gerum heiminn að betri stað')
 level = 0
-stig = 0
+stig = 10
 teljari = 0
 i = 0
 
@@ -97,6 +97,8 @@ rosmynd = pygame.image.load('Ros.png')
 rosmynd = pygame.transform.scale(rosmynd, (100, 150))
 eplatremynd = pygame.image.load('Eplatre.png')
 eplatremynd = pygame.transform.scale(eplatremynd, (140, 150))
+bakgrunnurStig = pygame.image.load('Stig.png')
+bakgrunnurStig = pygame.transform.scale(bakgrunnurStig, (100,40))
 
 ###### ANNAÐ #######
 clock = pygame.time.Clock()                            # TÍMI
@@ -112,16 +114,14 @@ def opnunarGluggi():
                 quit()
         skjaMynd.blit(bakgrunnur1, (0,0))
         skilabod1('Gerum heiminn að betri stað',10)
-        takkar("Hefja Leik",50,480,150,75,WHITE,GREY,'StartLevel1')
+        takkar("Hefja leik",50,480,150,75,WHITE,GREY,'StartLevel1')
         takkar("Fræðsla",600,480,150,75,WHITE,GREY,'Fræðsla')
         takkar("Upplýsingar um leik",250,480,300,75,WHITE,GREY,'Upplýsingar')
         pygame.display.update()
         clock.tick(10)
-
         #except:
             #print("Villa í opnunarglugga")
             #break
-
 #fræðsla um umhverfisvitund...
 def fraedsla():
     fraedsla = True
@@ -185,6 +185,7 @@ def bord1():
     global teljari
     b1 = True
     global rusl_breyta
+    global ruslageymsla1
     while teljari < 4:
         while b1:
             #try:
@@ -211,8 +212,6 @@ def bord1():
             takkar("Rauðu",650,500,100,75,WHITE,GREY,'raudTunna')
             pygame.display.update()
             clock.tick(10)
-
-
             #except:
                 #print("Villa í borði 1")
                 #break
@@ -221,9 +220,30 @@ def bord1():
 def randomrusl():
     global rusl_breyta
     global ruslageymsla1
+    global ruslalisti
     ruslalisti = [rusl1,rusl2,rusl3,rusl4,rusl5,rusl6,rusl7,rusl8,rusl9,rusl10]
     ruslageymsla1 = random.choice(ruslalisti[0:])
     skjaMynd.blit(ruslageymsla1, (377,100))
+    if (ruslageymsla1 == rusl1):
+        ruslalisti.remove(rusl1)
+    elif (ruslageymsla1 == rusl2):
+        ruslalisti.remove(rusl2)
+    elif (ruslageymsla1 == rusl3):
+        ruslalisti.remove(rusl3)
+    elif (ruslageymsla1 == rusl4):
+        ruslalisti.remove(rusl4)
+    elif (ruslageymsla1 == rusl5):
+        ruslalisti.remove(rusl5)
+    elif (ruslageymsla1 == rusl6):
+        ruslalisti.remove(rusl6)
+    elif (ruslageymsla1 == rusl7):
+        ruslalisti.remove(rusl7)
+    elif (ruslageymsla1 == rusl8):
+        ruslalisti.remove(rusl8)
+    elif (ruslageymsla1 == rusl9):
+        ruslalisti.remove(rusl9)
+    elif (ruslageymsla1 == rusl10):
+        ruslalisti.remove(rusl10)
     rusl_breyta = True
 
 def blaTunna():
@@ -383,10 +403,8 @@ def bord2():
             pygame.display.update()
             clock.tick(10)
 
-        #except:
-        #    print("Villa í borði 2")
-        #    break
     b3Inngangur()
+
 # Bæta við sér skilaboð fyrir hvern valkost ef við viljum í Sprint 4
 def giskA():
     global i
@@ -498,8 +516,9 @@ def b3Inngangur():
 ############### Borð 3 ###################
 def bord3():
     global stig
-    fisk = True
-    plas = True
+    tmpp_ = True
+    tmpf_ = True
+    tmp_ = 0
     #Upphafsstaður á háfi
     x = (display_breidd*0.35)
     y = (display_haed*0.73)
@@ -563,30 +582,32 @@ def bord3():
         if (y < fiskur_byrjay + fiskur_haed):
             if ((x > fiskur_byrjax and x < fiskur_byrjax + fiskur_breidd) or (x + hafur_breidd > fiskur_byrjax and x + hafur_breidd < fiskur_byrjax + fiskur_breidd)):
                 skilabod1("Æjæj þú átt að veiða plastið",5)
-                plas = True
-                #Hér eiga fræstigin að minnka...
-                if plas == True and fisk == True:
+                fiskur_byrjay = -800
+                if tmp_ != x and tmpf_ ==True:
                     stig -= 1
-                    fisk = False
+                    tmp_ = x
+                    tmpf_ = False
+
+        elif tmpf_ == False:
+            tmpf_ = True
+
 
         # Þegar háfurinn nær plasti
         if (y < plast_byrjay + plast_haed):
             if ((x > plast_byrjax and x < plast_byrjax + plast_breidd) or (x + plast_breidd > plast_byrjax and x + hafur_breidd < plast_byrjax + plast_breidd)):
                 skilabod1("Flott!",5)
+                plast_byrjay = -800
                 # Hér eiga fræstigin að hækka...
-                fisk = True
-                # Hér eiga fræstigin að hækka...
-                if fisk == True and plas == True:
+                if tmp_!=x and tmpp_==True:
                     stig += 3
-                    plas = False
+                    tmp_= x
+                    tmpp_= False
+
+        elif tmpp_== False:
+            tmpp_ = True
 
         pygame.display.update()
         clock.tick(20)
-
-        #except:
-        #    print("Villa í borði 3")
-        #    break
-
 
 ###### Vinna borð 3 #######
 def vinnurbord3(stig):
@@ -606,7 +627,7 @@ def vinnurbord3(stig):
 
 ########## LOKABORÐ ############
 def lokaBordInngangur():
-    tonlist()
+    lokaTonlist()
     global stig
     inngangur4 = True
     while inngangur4:
@@ -628,61 +649,67 @@ def lokaBordInngangur():
 # Borð 4
 def bord4():
     global stig
-    bordfjogur = True
     skjaMynd.blit(bakgrunnurb4, (0,0))
-    fraestig(stig)
+    bordfjogur = True
     while bordfjogur:
-        #try:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 quit()
-        #fraestig(stig)
+        #skjaMynd.blit(bakgrunnurb4, (0,0))
+        skjaMynd.blit(bakgrunnurStig, (0,0))
+        fraestig(stig)
         skilabod2('Nú getur þú valið hvort þú viljir', 12)
         skilabod2('planta eplatrjám eða rósum', 6)
         skilabod2('Ýttu á takkann til að planta',4)
         takkar("Eplatré",230,200,120,52,WHITE,GREY,'eplatre')
         takkar("Rósir",450,200,120,52,WHITE,GREY,'ros')
+        takkar("Hætta",690,-6,120,52,WHITE,GREY,'opnunargluggi')
         pygame.display.update()
-        clock.tick(30)
-        #except:
-            #print("Villa í borði 4")
-            #break
+        clock.tick(10)
 
 def eplaTre():
     global stig
-    while stig > 0:
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                quit()
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            quit()
+    if stig >= 1:
         x = random.randrange(20,600)
         y = random.randrange(350,450)
         skjaMynd.blit(eplatremynd,(x,y))
         stig -= 1
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                quit()
+    else:
+        skilabod2("Frábært hjá þér!", 1.95)
+        skilabod2("Þú hefur plantað öllum fræstigunum þínum :)", 2.2)
+        skilabod2("Ýttu á 'Hætta' til að fara í opnunarglugga", 2.3)
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            quit()
 
 def ros():
     global stig
-    while stig > 0:
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                quit()
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            quit()
+    if stig >= 1:
         x = random.randrange(20,600)
         y = random.randrange(350,500)
         skjaMynd.blit(rosmynd,(x,y))
         stig -= 1
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                quit()
+    else:
+        skilabod2("Frábært hjá þér!", 1.7)
+        skilabod2("Þú hefur plantað öllum fræstigunum þínum :)", 1.8)
+        skilabod2("Ýttu á 'Hætta' til að fara í opnunarglugga", 1.9)
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            quit()
 
 ####### ANNAÐ #########
-def fiskur(fiskurx, fiskury,fiskurbreidd,fiskurhaed):
+def fiskur(fiskurx,fiskury,fiskurbreidd,fiskurhaed):
     skjaMynd.blit(fiskageymsla,(fiskurx,fiskury,fiskurbreidd,fiskurhaed))
 
 def plast(plastx,plasty):
@@ -692,12 +719,17 @@ def hafurfall(x,y):
     skjaMynd.blit(hafurmynd,(x,y))
 
 def fraestig(stig):
-    fraestigTexti = font.render("Stig: " + str(stig), True, BLACK)
+    fraestigTexti = font.render("Fræ: " + str(stig), True, BLACK)
     skjaMynd.blit(fraestigTexti,[0,0])
 
 ###### Tónlist ########
 def tonlist():
     pygame.mixer.music.load('toystory.mp3')
+    pygame.mixer.music.set_endevent(pygame.constants.USEREVENT)
+    pygame.mixer.music.play(1)
+
+def lokaTonlist():
+    pygame.mixer.music.load('Draumar.mp3')
     pygame.mixer.music.set_endevent(pygame.constants.USEREVENT)
     pygame.mixer.music.play(1)
 
@@ -859,13 +891,10 @@ def main():
         if level == 0:
             if state_tune != 0:
                 state_tune = 0
-            opnunarGluggi()
+            lokaBordInngangur()
         pygame.display.update()
         pygame.display.flip()
         clock.tick(10)
-        #except:
-            #print("Villa")
-            #break
 
     pygame.quit()
 
