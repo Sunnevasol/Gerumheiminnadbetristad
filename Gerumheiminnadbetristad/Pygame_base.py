@@ -19,10 +19,9 @@ size = (display_breidd,display_haed)
 skjaMynd = pygame.display.set_mode(size)
 pygame.display.set_caption('Gerum heiminn að betri stað')
 level = 0
-stig = 10
+stig = 0
 teljari = 0
 i = 0
-
 ####### MYNDIR ########
 # Opnunargluggi - Mynd af jörðinni í litum
 bakgrunnur1 = pygame.image.load('jord4.png')
@@ -40,6 +39,16 @@ raudtunna = pygame.image.load('raudtunna.png')
 raudtunna = pygame.transform.scale(raudtunna, (390, 270))
 svorttunna =  pygame.image.load('svorttunna.png')
 svorttunna = pygame.transform.scale(svorttunna, (390, 270))
+blatunna2 = pygame.image.load('blatunna.png')
+blatunna2 = pygame.transform.scale(blatunna2, (250, 180))
+graentunna2 = pygame.image.load('graentunna.png')
+graentunna2 = pygame.transform.scale(graentunna2, (250, 180))
+bruntunna2 = pygame.image.load('bruntunna.png')
+bruntunna2 = pygame.transform.scale(bruntunna2, (250, 180))
+raudtunna2 = pygame.image.load('raudtunna.png')
+raudtunna2 = pygame.transform.scale(raudtunna2, (250, 180))
+svorttunna2 =  pygame.image.load('svorttunna.png')
+svorttunna2 = pygame.transform.scale(svorttunna2, (250, 180))
 rusl1 = pygame.image.load('epli2.png')
 rusl1 = pygame.transform.scale(rusl1, (200, 180))
 rusl2 = pygame.image.load('tyggjo.png')
@@ -59,12 +68,10 @@ rusl8 = pygame.transform.scale(rusl8, (290, 260))
 rusl9 = pygame.image.load('Plastpoki.png')
 rusl9 = pygame.transform.scale(rusl9, (150, 200))
 rusl10 = pygame.image.load('dos.jpg')
-rusl10 = pygame.transform.scale(rusl10, (190, 200))
+rusl10 = pygame.transform.scale(rusl10, (190, 190))
 ruslalisti = [rusl1,rusl2,rusl3,rusl4,rusl5,rusl6,rusl7,rusl8,rusl9,rusl10]
 ruslageymsla1 = random.choice(ruslalisti[0:])
 rusl_breyta = True
-# Bakgrunnur fyrir borð 1 -
-bakgrunnurb1 = pygame.image.load('pappirbak.jpg')
 # Borð 2 bakgrunnur
 bakgrunnurb2 = pygame.image.load('kritartafla.jpg')
 bakgrunnurb2 = pygame.transform.scale(bakgrunnurb2, (800, 600))
@@ -76,7 +83,7 @@ hafurmynd = pygame.image.load('hafur1.png')
 hafurmynd = pygame.transform.scale(hafurmynd, (200, 200))
 hafur_breidd = 86
 hafur_haed = 40
-# Borð 3 - Myndir af plasti fyrir Sjóborð
+# Myndir af plasti fyrir Sjóborð
 plastflaska = pygame.image.load('Plastflaska.png')
 plastflaska = pygame.transform.scale(plastflaska, (113, 170))
 # Myndir af fiskum
@@ -119,9 +126,7 @@ def opnunarGluggi():
         takkar("Upplýsingar um leik",250,480,300,75,WHITE,GREY,'Upplýsingar')
         pygame.display.update()
         clock.tick(10)
-        #except:
-            #print("Villa í opnunarglugga")
-            #break
+
 #fræðsla um umhverfisvitund...
 def fraedsla():
     fraedsla = True
@@ -210,11 +215,10 @@ def bord1():
             takkar("Grænu",350,500,100,75,WHITE,GREY,'graenTunna')
             takkar("Svörtu",500,500,100,75,WHITE,GREY,'svortTunna')
             takkar("Rauðu",650,500,100,75,WHITE,GREY,'raudTunna')
+            takkar("Hjálp",698,10,90,55, WHITE, GREY,'hjalp')
             pygame.display.update()
             clock.tick(10)
-            #except:
-                #print("Villa í borði 1")
-                #break
+
     bord1vinna()
 
 def randomrusl():
@@ -318,6 +322,31 @@ def vitlaustunna():
         takkar("Reyna aftur",310,300,180,75,WHITE,GREY,'StartLevel1b')
         pygame.display.update()
         clock.tick(10)
+
+def hjalp():
+    pass
+    hjalp = True
+    while hjalp:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                quit()
+        skjaMynd.blit(bakgrunnurIntro, (0,0))
+        skjaMynd.blit(blatunna2,(-50,70))
+        skjaMynd.blit(bruntunna2,(-50,160))
+        skjaMynd.blit(graentunna2,(-50,250))
+        skjaMynd.blit(svorttunna2,(-50,340))
+        skjaMynd.blit(raudtunna2,(-50,430))
+        skilabod1('Hvaða rusl fer í hvaða tunnu?', 9)
+        skilabod2('Dagblöð, pappafernur, ', 4)
+        skilabod2('Ávextir, matarafgangar', 2.5)
+        skilabod2('Plastumbúðir, ...', 1.8)
+        skilabod2('Almennt', 1.4)
+        skilabod2('Gosdósir, plastflöskur, ...', 1.15)
+        takkar("Til baka",650,290,150,65,WHITE,GREY,'StartLevel1b')
+        pygame.display.update()
+        clock.tick(10)
+
 
 def bord1vinna():
     tonlist()
@@ -849,6 +878,8 @@ def takkar(text,x,y,breidd,haed,litur1,litur2,action=None):
                 raudTunna()
             elif action == "StartLevel1b":
                 bord1()
+            elif action == "hjalp":
+                hjalp()
             elif action == "StartLevel2":
                 b2Inngangur()
             elif action == "StartLevel2b":
@@ -884,14 +915,13 @@ def main():
     done = False
     state_tune = 1
     while not done:
-        #try:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 done = True
         if level == 0:
             if state_tune != 0:
                 state_tune = 0
-            lokaBordInngangur()
+            hjalp()
         pygame.display.update()
         pygame.display.flip()
         clock.tick(10)
