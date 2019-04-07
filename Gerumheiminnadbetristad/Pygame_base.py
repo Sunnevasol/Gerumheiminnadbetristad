@@ -143,7 +143,7 @@ def fraedsla():
         skilabod3c('náttúruna, þá mun Jörðin á endanum gefast upp á okkur. Þá ',2.0)
         skilabod3c('erum við í vondum málum því hvar ætlum við að fá nýja Jörð?',1.75)
         skilabod3d('Þetta er í okkar höndum og því er mikilvægt að allir leggist á eitt!',1.55)
-        takkar("Til baka",320,530,150,75,WHITE,GREY,'opnunargluggi')
+        takkar("Til baka",320,420,150,75,WHITE,GREY,'opnunargluggi')
         pygame.display.update()
         clock.tick(10)
 
@@ -185,7 +185,6 @@ def b1Inngangur():
         clock.tick(10)
 
 def bord1():
-    #pygame.mixer.music.pause()
     global stig
     global teljari
     b1 = True
@@ -193,7 +192,6 @@ def bord1():
     global ruslageymsla1
     while teljari < 4:
         while b1:
-            #try:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
@@ -218,7 +216,6 @@ def bord1():
             takkar("Hjálp",698,10,90,55, WHITE, GREY,'hjalp')
             pygame.display.update()
             clock.tick(10)
-
     bord1vinna()
 
 def randomrusl():
@@ -387,7 +384,6 @@ valClisti = ["Fæ far hjá ömmu", "Læt hana inn í ísskáp og mamma gengur fr
 # BORÐ 2 - SPURNINGAR
 # Inngangur
 def b2Inngangur():
-    tonlist()
     inngangur3 = True
     while inngangur3:
         for event in pygame.event.get():
@@ -431,7 +427,6 @@ def bord2():
             takkar("C",690,450,75,75,WHITE,GREY,'c')
             pygame.display.update()
             clock.tick(10)
-
     b3Inngangur()
 
 # Bæta við sér skilaboð fyrir hvern valkost ef við viljum í Sprint 4
@@ -921,7 +916,7 @@ def main():
         if level == 0:
             if state_tune != 0:
                 state_tune = 0
-            hjalp()
+            opnunarGluggi()
         pygame.display.update()
         pygame.display.flip()
         clock.tick(10)
