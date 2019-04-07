@@ -180,7 +180,7 @@ def b1Inngangur():
         skilabod2('Kannt þú að flokka? látum okkur sjá...', 2.1)
         skilabod2('Ýttu á "Byrja!" til að hefja leik', 1.8)
         takkar("Byrja",150,400,150,75,WHITE,GREY,'StartLevel1b')
-        takkar("Hætta",550,400,150,75,WHITE,GREY,'opnunargluggi')
+        takkar("Hætta",550,400,150,75,WHITE,GREY,'haetta')
         pygame.display.update()
         clock.tick(10)
 
@@ -357,8 +357,8 @@ def bord1vinna():
         fraestig(stig)
         skilabod1('Til hamingju!',3)
         skilabod1('þú kláraðir borð 1',2)
-        takkar("Halda áfram",150,450,190,75,WHITE,GREY,'StartLevel2')
-        takkar("Hætta",450,450,150,75,WHITE,GREY,'opnunargluggi')
+        takkar("Halda áfram",150,520,190,75,WHITE,GREY,'StartLevel2')
+        takkar("Hætta",450,520,150,75,WHITE,GREY,'haetta')
         pygame.display.update()
         pygame.time.wait(10)
 
@@ -395,8 +395,8 @@ def b2Inngangur():
         skilabod1('Þú ert komin/nn í borð 2', 2.6)
         skilabod2('Nú reynir á gáfurnar, gangi þér vel! :)', 2.1)
         skilabod2('Ýttu á "Byrja!" til að hefja leik', 1.8)
-        takkar("Byrja",150,450,150,75,WHITE,GREY,'StartLevel2b')
-        takkar("Hætta",550,450,150,75,WHITE,GREY,'opnunargluggi')
+        takkar("Byrja",150,520,150,75,WHITE,GREY,'StartLevel2b')
+        takkar("Hætta",550,520,150,75,WHITE,GREY,'opnunargluggi')
         pygame.display.update()
         clock.tick(10)
 
@@ -733,6 +733,11 @@ def ros():
             quit()
 
 ####### ANNAÐ #########
+def haetta():
+    global stig
+    stig = 0
+    opnunarGluggi()
+
 def fiskur(fiskurx,fiskury,fiskurbreidd,fiskurhaed):
     skjaMynd.blit(fiskageymsla,(fiskurx,fiskury,fiskurbreidd,fiskurhaed))
 
@@ -897,6 +902,8 @@ def takkar(text,x,y,breidd,haed,litur1,litur2,action=None):
                 eplaTre()
             elif action == "ros":
                 ros()
+            elif action == "haetta":
+                haetta()
 
     else:
         pygame.draw.rect(skjaMynd, litur1,(x,y,breidd,haed))
