@@ -19,7 +19,7 @@ size = (display_breidd,display_haed)
 skjaMynd = pygame.display.set_mode(size)
 pygame.display.set_caption('Gerum heiminn að betri stað')
 level = 0
-stig = 0
+stig = 20
 teljari = 0
 i = 0
 ####### MYNDIR ########
@@ -698,19 +698,14 @@ def eplaTre():
         if event.type == pygame.QUIT:
             pygame.quit()
             quit()
-    if stig >= 1:
+    if stig > 1:
         x = random.randrange(20,600)
         y = random.randrange(350,450)
         skjaMynd.blit(eplatremynd,(x,y))
         stig -= 1
     else:
-        skilabod2("Frábært hjá þér!", 1.95)
-        skilabod2("Þú hefur plantað öllum fræstigunum þínum :)", 2.2)
-        skilabod2("Ýttu á 'Hætta' til að fara í opnunarglugga", 2.3)
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            pygame.quit()
-            quit()
+        final()
+
 
 def ros():
     global stig
@@ -718,19 +713,29 @@ def ros():
         if event.type == pygame.QUIT:
             pygame.quit()
             quit()
-    if stig >= 1:
+    if stig > 1:
         x = random.randrange(20,600)
         y = random.randrange(350,500)
         skjaMynd.blit(rosmynd,(x,y))
         stig -= 1
     else:
-        skilabod2("Frábært hjá þér!", 1.7)
-        skilabod2("Þú hefur plantað öllum fræstigunum þínum :)", 1.8)
-        skilabod2("Ýttu á 'Hætta' til að fara í opnunarglugga", 1.9)
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            pygame.quit()
-            quit()
+        final()
+
+
+def final():
+    vinnab4 = True
+    while vinnab4:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                quit()
+        skjaMynd.blit(bakgrunnurIntro,(0,0))
+        skilabod1('Frábært hjá þér!',4)
+        skilabod2('Þú hefur plantað öllum fræstigunum þínum :)',2.5)
+        skilabod2("Ýttu á 'Hætta' til að fara í opnunarglugga", 2.2)
+        takkar("Hætta",350,450,190,75,WHITE,GREY,'opnunargluggi')
+        pygame.display.update()
+        pygame.time.wait(10)
 
 ####### ANNAÐ #########
 def haetta():
@@ -923,7 +928,7 @@ def main():
         if level == 0:
             if state_tune != 0:
                 state_tune = 0
-            opnunarGluggi()
+            lokaBordInngangur()
         pygame.display.update()
         pygame.display.flip()
         clock.tick(10)
