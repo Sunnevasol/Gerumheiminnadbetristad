@@ -19,7 +19,7 @@ size = (display_breidd,display_haed)
 skjaMynd = pygame.display.set_mode(size)
 pygame.display.set_caption('Gerum heiminn að betri stað')
 level = 0
-stig = 20
+stig = 0
 teljari = 0
 i = 0
 ####### MYNDIR ########
@@ -105,7 +105,7 @@ rosmynd = pygame.transform.scale(rosmynd, (100, 150))
 eplatremynd = pygame.image.load('Eplatre.png')
 eplatremynd = pygame.transform.scale(eplatremynd, (140, 150))
 bakgrunnurStig = pygame.image.load('Stig.png')
-bakgrunnurStig = pygame.transform.scale(bakgrunnurStig, (100,40))
+bakgrunnurStig = pygame.transform.scale(bakgrunnurStig, (105,40))
 
 ###### ANNAÐ #######
 clock = pygame.time.Clock()                            # TÍMI
@@ -337,9 +337,9 @@ def hjalp():
         skilabod1('Hvaða rusl fer í hvaða tunnu?', 9)
         skilabod2('Dagblöð, pappafernur, ', 4)
         skilabod2('Ávextir, matarafgangar', 2.5)
-        skilabod2('Plastumbúðir, ...', 1.8)
-        skilabod2('Almennt', 1.4)
-        skilabod2('Gosdósir, plastflöskur, ...', 1.15)
+        skilabod2('Plastpokar, nammibréf', 1.8)
+        skilabod2('Bómull, brotin blómapottur', 1.4)
+        skilabod2('Gosdósir, plastflöskur', 1.15)
         takkar("Til baka",650,290,150,65,WHITE,GREY,'StartLevel1b')
         pygame.display.update()
         clock.tick(10)
@@ -605,9 +605,9 @@ def bord3():
         #Þegar Háfurinn nær óvart fiski
         if (y < fiskur_byrjay + fiskur_haed):
             if ((x > fiskur_byrjax and x < fiskur_byrjax + fiskur_breidd) or (x + hafur_breidd > fiskur_byrjax and x + hafur_breidd < fiskur_byrjax + fiskur_breidd)):
-                skilabod1("Æjæj þú átt að veiða plastið",5)
                 fiskur_byrjay = -800
                 if tmp_ != x and tmpf_ ==True:
+                    skilabod4(": (",5)
                     stig -= 1
                     tmp_ = x
                     tmpf_ = False
@@ -619,10 +619,10 @@ def bord3():
         # Þegar háfurinn nær plasti
         if (y < plast_byrjay + plast_haed):
             if ((x > plast_byrjax and x < plast_byrjax + plast_breidd) or (x + plast_breidd > plast_byrjax and x + hafur_breidd < plast_byrjax + plast_breidd)):
-                skilabod1("Flott!",5)
                 plast_byrjay = -800
                 # Hér eiga fræstigin að hækka...
                 if tmp_!=x and tmpp_==True:
+                    skilabod4(": )",5)
                     stig += 3
                     tmp_= x
                     tmpp_= False
@@ -733,7 +733,7 @@ def final():
         skilabod1('Frábært hjá þér!',4)
         skilabod2('Þú hefur plantað öllum fræstigunum þínum :)',2.5)
         skilabod2("Ýttu á 'Hætta' til að fara í opnunarglugga", 2.2)
-        takkar("Hætta",350,450,190,75,WHITE,GREY,'opnunargluggi')
+        takkar("Hætta",350,300,190,75,WHITE,GREY,'opnunargluggi')
         pygame.display.update()
         pygame.time.wait(10)
 
@@ -928,7 +928,7 @@ def main():
         if level == 0:
             if state_tune != 0:
                 state_tune = 0
-            lokaBordInngangur()
+            opnunarGluggi()
         pygame.display.update()
         pygame.display.flip()
         clock.tick(10)
